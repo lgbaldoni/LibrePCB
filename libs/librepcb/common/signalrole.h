@@ -136,8 +136,8 @@ inline SExpression serialize(const SignalRole& obj) {
 }
 
 template <>
-inline SignalRole deserialize(const SExpression& sexpr, bool throwIfEmpty) {
-  QString str = sexpr.getStringOrToken(throwIfEmpty);
+inline SignalRole deserialize(const SExpression& sexpr) {
+  QString str = sexpr.getStringOrToken();
   foreach (const SignalRole& role, SignalRole::getAllRoles()) {
     if (role.toStr() == str) {
       return role;

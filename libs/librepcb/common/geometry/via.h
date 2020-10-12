@@ -141,8 +141,8 @@ inline SExpression serialize(const Via::Shape& obj) {
 }
 
 template <>
-inline Via::Shape deserialize(const SExpression& sexpr, bool throwIfEmpty) {
-  QString str = sexpr.getStringOrToken(throwIfEmpty);
+inline Via::Shape deserialize(const SExpression& sexpr) {
+  QString str = sexpr.getStringOrToken();
   if (str == "round")
     return Via::Shape::Round;
   else if (str == "square")
