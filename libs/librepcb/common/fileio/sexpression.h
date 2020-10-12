@@ -41,11 +41,11 @@ namespace librepcb {
 class SExpression;
 
 template <typename T>
-SExpression serializeToSExpression(const T& obj);  // can throw
+SExpression serialize(const T& obj);  // can throw
 
 template <typename T>
-T deserializeFromSExpression(const SExpression& sexpr,
-                             bool throwIfEmpty);  // can throw
+T deserialize(const SExpression& sexpr,
+              bool throwIfEmpty);  // can throw
 
 /*******************************************************************************
  *  Class SExpression
@@ -90,7 +90,7 @@ public:
   template <typename T>
   T getValue(bool throwIfEmpty = false) const {
     try {
-      return deserializeFromSExpression<T>(*this, throwIfEmpty);
+      return deserialize<T>(*this, throwIfEmpty);
     } catch (const Exception& e) {
       throw FileParseError(__FILE__, __LINE__, mFilePath, -1, -1, mValue,
                            e.getMsg());
@@ -118,7 +118,7 @@ public:
   SExpression& appendChild(const SExpression& child, bool linebreak);
   template <typename T>
   SExpression& appendChild(const T& obj) {
-    appendChild(serializeToSExpression(obj), false);
+    appendChild(serialize(obj), false);
     return *this;
   }
   template <typename T>
@@ -159,44 +159,44 @@ private:  // Data
  ******************************************************************************/
 
 template <>
-inline SExpression serializeToSExpression(const QString& obj) {
+inline SExpression serialize(const QString& obj) {
   return SExpression::createString(obj);
 }
 
 template <>
-inline SExpression serializeToSExpression(const bool& obj) {
+inline SExpression serialize(const bool& obj) {
   return SExpression::createToken(obj ? "true" : "false");
 }
 
 template <>
-inline SExpression serializeToSExpression(const int& obj) {
+inline SExpression serialize(const int& obj) {
   return SExpression::createToken(QString::number(obj));
 }
 
 template <>
-inline SExpression serializeToSExpression(const uint& obj) {
+inline SExpression serialize(const uint& obj) {
   return SExpression::createToken(QString::number(obj));
 }
 
 template <>
-inline SExpression serializeToSExpression(const QColor& obj) {
+inline SExpression serialize(const QColor& obj) {
   return SExpression::createString(obj.isValid() ? obj.name(QColor::HexArgb)
                                                  : "");
 }
 
 template <>
-inline SExpression serializeToSExpression(const QUrl& obj) {
+inline SExpression serialize(const QUrl& obj) {
   return SExpression::createString(
       obj.isValid() ? obj.toString(QUrl::PrettyDecoded) : "");
 }
 
 template <>
-inline SExpression serializeToSExpression(const QDateTime& obj) {
+inline SExpression serialize(const QDateTime& obj) {
   return SExpression::createToken(obj.toUTC().toString(Qt::ISODate));
 }
 
 template <>
-inline SExpression serializeToSExpression(const SExpression& obj) {
+inline SExpression serialize(const SExpression& obj) {
   return obj;
 }
 
@@ -205,14 +205,12 @@ inline SExpression serializeToSExpression(const SExpression& obj) {
  ******************************************************************************/
 
 template <>
-inline QString deserializeFromSExpression(const SExpression& sexpr,
-                                          bool throwIfEmpty) {
+inline QString deserialize(const SExpression& sexpr, bool throwIfEmpty) {
   return sexpr.getStringOrToken(throwIfEmpty);  // can throw
 }
 
 template <>
-inline bool deserializeFromSExpression(const SExpression& sexpr,
-                                       bool throwIfEmpty) {
+inline bool deserialize(const SExpression& sexpr, bool throwIfEmpty) {
   if (sexpr.getStringOrToken(throwIfEmpty) == "true") {
     return true;
   } else if (sexpr.getStringOrToken(throwIfEmpty) == "false") {
@@ -223,8 +221,7 @@ inline bool deserializeFromSExpression(const SExpression& sexpr,
 }
 
 template <>
-inline int deserializeFromSExpression(const SExpression& sexpr,
-                                      bool throwIfEmpty) {
+inline int deserialize(const SExpression& sexpr, bool throwIfEmpty) {
   bool ok = false;
   int value = sexpr.getStringOrToken(throwIfEmpty).toInt(&ok);
   if (ok) {
@@ -235,8 +232,7 @@ inline int deserializeFromSExpression(const SExpression& sexpr,
 }
 
 template <>
-inline uint deserializeFromSExpression(const SExpression& sexpr,
-                                       bool throwIfEmpty) {
+inline uint deserialize(const SExpression& sexpr, bool throwIfEmpty) {
   bool ok = false;
   uint value = sexpr.getStringOrToken(throwIfEmpty).toUInt(&ok);
   if (ok) {
@@ -247,8 +243,7 @@ inline uint deserializeFromSExpression(const SExpression& sexpr,
 }
 
 template <>
-inline QDateTime deserializeFromSExpression(const SExpression& sexpr,
-                                            bool throwIfEmpty) {
+inline QDateTime deserialize(const SExpression& sexpr, bool throwIfEmpty) {
   QDateTime obj =
       QDateTime::fromString(sexpr.getStringOrToken(throwIfEmpty), Qt::ISODate)
           .toLocalTime();
@@ -260,8 +255,7 @@ inline QDateTime deserializeFromSExpression(const SExpression& sexpr,
 }
 
 template <>
-inline QColor deserializeFromSExpression(const SExpression& sexpr,
-                                         bool throwIfEmpty) {
+inline QColor deserialize(const SExpression& sexpr, bool throwIfEmpty) {
   QColor obj(sexpr.getStringOrToken(throwIfEmpty));
   if (obj.isValid()) {
     return obj;
@@ -271,8 +265,7 @@ inline QColor deserializeFromSExpression(const SExpression& sexpr,
 }
 
 template <>
-inline QUrl deserializeFromSExpression(const SExpression& sexpr,
-                                       bool throwIfEmpty) {
+inline QUrl deserialize(const SExpression& sexpr, bool throwIfEmpty) {
   QUrl obj(sexpr.getStringOrToken(throwIfEmpty), QUrl::StrictMode);
   if (obj.isValid()) {
     return obj;
