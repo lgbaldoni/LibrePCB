@@ -79,37 +79,11 @@ public:
   bool isLineBreak() const noexcept { return mType == Type::LineBreak; }
   bool isMultiLineList() const noexcept;
   const QString& getName() const;
-  const QString& getStringOrToken() const;
-  const QList<SExpression>& getChildren() const { return mChildren; }
+  const QString& getValue() const;
+  const QList<SExpression>& getChildren() const noexcept { return mChildren; }
   QList<SExpression> getChildren(const QString& name) const noexcept;
-  const SExpression& getChildByIndex(int index) const;
-  const SExpression* tryGetChildByPath(const QString& path) const noexcept;
-  const SExpression& getChildByPath(const QString& path) const;
-
-  template <typename T>
-  T getValue() const {
-    try {
-      return deserialize<T>(*this);
-    } catch (const Exception& e) {
-      throw FileParseError(__FILE__, __LINE__, mFilePath, -1, -1, mValue,
-                           e.getMsg());
-    }
-  }
-
-  template <typename T>
-  T getValueByPath(const QString& path) const {
-    const SExpression& child = getChildByPath(path);
-    return child.getValueOfFirstChild<T>();
-  }
-
-  template <typename T>
-  T getValueOfFirstChild() const {
-    if (mChildren.count() < 1) {
-      throw FileParseError(__FILE__, __LINE__, mFilePath, -1, -1, QString(),
-                           tr("Node does not have children."));
-    }
-    return mChildren.at(0).getValue<T>();
-  }
+  const SExpression* tryGetChild(const QString& path) const noexcept;
+  const SExpression& getChild(const QString& path) const;
 
   // General Methods
   SExpression& appendLineBreak();
@@ -205,14 +179,14 @@ inline SExpression serialize(const SExpression& obj) {
 
 template <>
 inline QString deserialize(const SExpression& sexpr) {
-  return sexpr.getStringOrToken();  // can throw
+  return sexpr.getValue();  // can throw
 }
 
 template <>
 inline bool deserialize(const SExpression& sexpr) {
-  if (sexpr.getStringOrToken() == "true") {
+  if (sexpr.getValue() == "true") {
     return true;
-  } else if (sexpr.getStringOrToken() == "false") {
+  } else if (sexpr.getValue() == "false") {
     return false;
   } else
     throw RuntimeError(__FILE__, __LINE__,
@@ -222,7 +196,7 @@ inline bool deserialize(const SExpression& sexpr) {
 template <>
 inline int deserialize(const SExpression& sexpr) {
   bool ok = false;
-  int value = sexpr.getStringOrToken().toInt(&ok);
+  int value = sexpr.getValue().toInt(&ok);
   if (ok) {
     return value;
   } else
@@ -233,7 +207,7 @@ inline int deserialize(const SExpression& sexpr) {
 template <>
 inline uint deserialize(const SExpression& sexpr) {
   bool ok = false;
-  uint value = sexpr.getStringOrToken().toUInt(&ok);
+  uint value = sexpr.getValue().toUInt(&ok);
   if (ok) {
     return value;
   } else
@@ -243,8 +217,8 @@ inline uint deserialize(const SExpression& sexpr) {
 
 template <>
 inline QDateTime deserialize(const SExpression& sexpr) {
-  QDateTime obj = QDateTime::fromString(sexpr.getStringOrToken(), Qt::ISODate)
-                      .toLocalTime();
+  QDateTime obj =
+      QDateTime::fromString(sexpr.getValue(), Qt::ISODate).toLocalTime();
   if (obj.isValid())
     return obj;
   else
@@ -254,7 +228,7 @@ inline QDateTime deserialize(const SExpression& sexpr) {
 
 template <>
 inline QColor deserialize(const SExpression& sexpr) {
-  QColor obj(sexpr.getStringOrToken());
+  QColor obj(sexpr.getValue());
   if (obj.isValid()) {
     return obj;
   } else
@@ -264,7 +238,7 @@ inline QColor deserialize(const SExpression& sexpr) {
 
 template <>
 inline QUrl deserialize(const SExpression& sexpr) {
-  QUrl obj(sexpr.getStringOrToken(), QUrl::StrictMode);
+  QUrl obj(sexpr.getValue(), QUrl::StrictMode);
   if (obj.isValid()) {
     return obj;
   } else
