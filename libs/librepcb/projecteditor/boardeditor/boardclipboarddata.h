@@ -109,6 +109,16 @@ public:
       root.appendChild("mirror", mirrored, false);
       strokeTexts.serialize(root);
     }
+
+    bool operator!=(const Device& rhs) noexcept {
+      return (componentUuid != rhs.componentUuid) ||
+          (libDeviceUuid != rhs.libDeviceUuid) ||
+          (libFootprintUuid != rhs.libFootprintUuid) ||
+          (position != rhs.position) ||
+          (rotation != rhs.rotation) ||
+          (mirrored != rhs.mirrored) ||
+          (strokeTexts != rhs.strokeTexts);
+    }
   };
 
   struct NetSegment : public SerializableObject {

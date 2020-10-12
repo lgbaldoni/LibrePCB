@@ -20,13 +20,15 @@ LIBS += \
     -L$${DESTDIR} \
     -lgoogletest \
     -llibrepcblibrarymanager \
+    -llibrepcbprojecteditor \
     -llibrepcbeagleimport \
     -llibrepcbworkspace \
     -llibrepcbproject \
-    -llibrepcblibrary \    # Note: The order of the libraries is very important for the linker!
-    -llibrepcbcommon \     # Another order could end up in "undefined reference" errors!
-    -lsexpresso \
+    -llibrepcblibrary \
+    -llibrepcbcommon \
+    -lhoedown \
     -lmuparser \
+    -lsexpresso \
     -lparseagle \
 
 # Solaris based systems need to link against libproc
@@ -42,6 +44,7 @@ INCLUDEPATH += \
 
 DEPENDPATH += \
     ../../libs/librepcb/librarymanager \
+    ../../libs/librepcb/projecteditor \
     ../../libs/librepcb/eagleimport \
     ../../libs/librepcb/workspace \
     ../../libs/librepcb/project \
@@ -60,7 +63,8 @@ isEmpty(UNBUNDLE) {
     # These libraries will only be linked statically when not unbundling
     PRE_TARGETDEPS += \
         $${DESTDIR}/liblibrepcblibrarymanager.a \
-        $${DESTDIR}/liblibrepcbeagleimport.a \
+        $${DESTDIR}/liblibrepcbprojecteditor.a \
+        $${DESTDIR}/liblibrepcblibraryeditor.a \
         $${DESTDIR}/liblibrepcbworkspace.a \
         $${DESTDIR}/liblibrepcbproject.a \
         $${DESTDIR}/liblibrepcblibrary.a \
@@ -75,6 +79,9 @@ SOURCES += \
     common/applicationtest.cpp \
     common/attributes/attributekeytest.cpp \
     common/attributes/attributesubstitutortest.cpp \
+    common/attributes/attributetest.cpp \
+    common/attributes/attributetypetest.cpp \
+    common/attributes/attributeunittest.cpp \
     common/circuitidentifiertest.cpp \
     common/fileio/csvfiletest.cpp \
     common/fileio/directorylocktest.cpp \
@@ -120,6 +127,7 @@ SOURCES += \
     project/boards/boardplanefragmentsbuildertest.cpp \
     project/library/projectlibrarytest.cpp \
     project/projecttest.cpp \
+    projecteditor/boardeditor/boardclipboarddatatest.cpp \
     workspace/workspacetest.cpp \
 
 HEADERS += \
