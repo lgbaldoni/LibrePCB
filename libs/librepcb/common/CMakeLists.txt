@@ -334,11 +334,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 add_library(librepcbcommon STATIC ${COMMON_SOURCES} ${LIBREPCB_RESOURCES})
 target_include_directories(librepcbcommon PUBLIC ${COMMON_INCLUDES})
 target_link_libraries(librepcbcommon Qt::Core Qt::Network Qt::OpenGL
-  Qt::PrintSupport Qt::Sql Qt::Widgets QuaZip::QuaZip muparser)
-### sexpresso?
+  Qt::PrintSupport Qt::Sql Qt::Widgets QuaZip::QuaZip muparser sexpresso)
 
-###set_target_properties(librepcbcommon PROPERTIES
-###  INTERFACE_INCLUDE_DIRECTORIES ${LIBREPCB_INCLUDES})
+# set_target_properties() doesn't work properly with multiple directories
 set_property(TARGET librepcbcommon PROPERTY
   INTERFACE_INCLUDE_DIRECTORIES ${LIBRARY_INCLUDES})
 
