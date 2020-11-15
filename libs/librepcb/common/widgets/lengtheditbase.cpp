@@ -367,3 +367,5 @@ QString LengthEditBase::getValueStr(const LengthUnit& unit) const noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_lengtheditbase.cpp>

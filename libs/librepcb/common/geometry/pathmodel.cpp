@@ -278,3 +278,5 @@ bool PathModel::setData(const QModelIndex& index, const QVariant& value,
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_pathmodel.cpp>

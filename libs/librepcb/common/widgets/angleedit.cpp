@@ -78,3 +78,5 @@ void AngleEdit::spinBoxValueChanged(double value) noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_angleedit.cpp>

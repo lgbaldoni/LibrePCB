@@ -142,3 +142,5 @@ AboutDialog::~AboutDialog() noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_aboutdialog.cpp>

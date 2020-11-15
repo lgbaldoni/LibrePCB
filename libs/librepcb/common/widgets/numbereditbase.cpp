@@ -84,3 +84,5 @@ void NumberEditBase::selectAll() noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_numbereditbase.cpp>

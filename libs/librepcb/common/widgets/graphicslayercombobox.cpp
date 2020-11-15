@@ -117,3 +117,5 @@ void GraphicsLayerComboBox::currentIndexChanged(int index) noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_graphicslayercombobox.cpp>

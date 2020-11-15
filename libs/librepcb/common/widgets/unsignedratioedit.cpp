@@ -89,3 +89,5 @@ void UnsignedRatioEdit::spinBoxValueChanged(double value) noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_unsignedratioedit.cpp>

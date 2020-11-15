@@ -73,3 +73,5 @@ void PositiveLengthEdit::valueChangedImpl() noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_positivelengthedit.cpp>

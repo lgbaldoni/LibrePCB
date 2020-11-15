@@ -146,3 +146,5 @@ void GridSettingsDialog::buttonBoxClicked(QAbstractButton* button) noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_gridsettingsdialog.cpp>

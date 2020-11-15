@@ -299,3 +299,5 @@ void GraphicsLayer::getDefaultValues(const QString& name, QString& nameTr,
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_graphicslayer.cpp>

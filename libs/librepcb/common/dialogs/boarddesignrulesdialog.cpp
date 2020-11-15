@@ -172,3 +172,5 @@ void BoardDesignRulesDialog::applyRules() noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_boarddesignrulesdialog.cpp>

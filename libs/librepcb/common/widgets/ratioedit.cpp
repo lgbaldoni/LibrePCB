@@ -89,3 +89,5 @@ void RatioEdit::spinBoxValueChanged(double value) noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_ratioedit.cpp>

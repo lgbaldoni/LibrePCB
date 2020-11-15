@@ -94,3 +94,5 @@ void AttributeListEditorWidget::setReferences(UndoStack* undoStack,
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_attributelisteditorwidget.cpp>

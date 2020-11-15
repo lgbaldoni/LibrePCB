@@ -292,3 +292,6 @@ void Application::removeAllTranslators() noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+// unsure if necessary
+#include <moc_application.cpp>

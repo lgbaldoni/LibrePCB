@@ -69,3 +69,5 @@ void LengthEdit::valueChangedImpl() noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_lengthedit.cpp>

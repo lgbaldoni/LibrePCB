@@ -101,3 +101,5 @@ void PathEditorWidget::setLengthUnit(const LengthUnit& unit) noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_patheditorwidget.cpp>

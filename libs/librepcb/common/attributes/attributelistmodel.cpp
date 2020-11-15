@@ -453,3 +453,5 @@ ComboBoxDelegate::Items AttributeListModel::buildUnitComboBoxData(
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_attributelistmodel.cpp>

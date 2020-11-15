@@ -135,3 +135,5 @@ void StatusBar::updateAbsoluteCursorPosition() noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_statusbar.cpp>

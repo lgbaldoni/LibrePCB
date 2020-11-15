@@ -129,3 +129,5 @@ void NetworkAccessManager::stop() noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_networkaccessmanager.cpp>

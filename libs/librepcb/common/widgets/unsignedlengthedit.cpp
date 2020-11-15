@@ -73,3 +73,5 @@ void UnsignedLengthEdit::valueChangedImpl() noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_unsignedlengthedit.cpp>

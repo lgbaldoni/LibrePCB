@@ -404,3 +404,5 @@ void GraphicsView::drawForeground(QPainter* painter, const QRectF& rect) {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_graphicsview.cpp>

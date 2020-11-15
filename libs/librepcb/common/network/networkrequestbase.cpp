@@ -314,3 +314,5 @@ QString NetworkRequestBase::getUserAgent() noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_networkrequestbase.cpp>

@@ -171,3 +171,5 @@ void FileDownload::fetchNewData() noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_filedownload.cpp>

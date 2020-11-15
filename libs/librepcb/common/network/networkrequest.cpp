@@ -72,3 +72,5 @@ void NetworkRequest::fetchNewData() noexcept {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_networkrequest.cpp>

@@ -236,3 +236,5 @@ QHash<QString, QString> SQLiteDatabase::getSqliteCompileOptions() {
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_sqlitedatabase.cpp>

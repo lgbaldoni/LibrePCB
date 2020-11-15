@@ -269,3 +269,5 @@ void StrokeFont::computeBoundingRect(const QVector<Path>& paths,
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_strokefont.cpp>

@@ -126,3 +126,5 @@ void PolygonPropertiesDialog::selectLayerNameInCombobox(
  ******************************************************************************/
 
 }  // namespace librepcb
+
+#include <moc_polygonpropertiesdialog.cpp>
